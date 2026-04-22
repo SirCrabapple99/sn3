@@ -42,4 +42,31 @@ observer.observe(_console)
 // move camera back
 camera.position.z = 5;
 
-console.log('scene.js loaded')
+// temp scene stuff
+// scene rect
+const g1 = new THREE.BoxGeometry(2, 1, 1);
+const m1 = new THREE.MeshStandardMaterial({ color: 0xff00ff });
+const c1 = new THREE.Mesh(g1, m1);
+scene.add(c1);
+
+c1.position.y = -1;
+c1.castShadow = true;
+
+// scene plane
+const g2 = new THREE.PlaneGeometry(10, 10);
+const m2 = new THREE.MeshStandardMaterial({ color: 0xffffff });
+const p1 = new THREE.Mesh(g2, m2);
+scene.add(p1);
+
+p1.rotation.x = -Math.PI / 2;
+p1.position.y = -2;
+p1.receiveShadow = true;
+
+// scene light
+const l1 = new THREE.PointLight(0xffffff, 300, 100);
+l1.position.set(10, 10, 10);
+scene.add(l1);
+
+l1.castShadow = true;
+
+console.log('test scene loaded')
