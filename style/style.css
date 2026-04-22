@@ -1,0 +1,124 @@
+html,
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+#canvas {
+  width: 100vw;
+  height: 100vh;
+  vertical-align: bottom;
+}
+
+/* console */
+
+#console {
+  background-color: #242424;
+
+  width: 100%;
+  min-height: 75px;
+  height: 9000px;
+  max-height: 15px;
+
+  overflow-y: scroll;
+  overflow-x: hidden;
+  position: fixed;
+
+  bottom: 0;
+  left: 0;
+}
+
+#consoleResize {
+  background-color: transparent;
+
+  width: 100%;
+  min-height: 10px;
+
+  bottom: 70px;
+  position: fixed;
+}
+
+#consoleResize:hover {
+  cursor: ns-resize;
+}
+
+.console_error {
+  margin-top: 2px;
+  margin-bottom: 3.5px;
+  line-height: 15px;
+  padding-left: 15px;
+  padding-top: 2.5px;
+
+  background-color: rgba(75, 0, 0, 0.75);
+  color: red;
+
+  width: 100%;
+  height: 15px;
+  
+  display: block;
+  outline: 2px solid rgba(75, 0, 0, 1);
+}
+
+.console_error:hover {
+  background-color: rgba(25, 55, 125, 0.5);
+}
+
+.console_warn {
+  margin-top: 2px;
+  margin-bottom: 3.5px;
+  line-height: 15px;
+  padding-left: 17.3px;
+  padding-top: 2.5px;
+
+  background-color: rgba(147, 107, 9, 0.35);
+  color: gold;
+
+  width: 100%;
+  height: 15px;
+
+  display: block;
+  outline: 2px solid rgba(147, 107, 9, 0.45);
+}
+
+.console_warn:hover {
+  background-color: rgba(25, 55, 125, 0.5);
+}
+
+.console_log {
+  margin-top: 2px;
+  margin-bottom: 2px;
+  line-height: 15px;
+  padding-left: 17.3px;
+  padding-top: 2.5px;
+
+  background-color: transparent;
+  color: white;
+
+  width: 100%;
+  height: 15px;
+
+  display: block;
+}
+
+.console_log:hover {
+  background-color: rgba(25, 55, 125, 0.5);
+}
+
+/* inspector */
+#inspector {
+  position: fixed;
+
+  width: 900px;
+  max-width: 200px;
+}
+
+/* scenes */
+
+/* fonts */
+.mono {
+  font-family: monospace;
+  font-weight: 400;
+}
