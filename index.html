@@ -16,29 +16,26 @@
       {
         "imports": {
           "three": "https://unpkg.com/three/build/three.module.js",
-          "three/addons/": "https://unpkg.com/three/examples/jsm/"
+          "three/addons/": "https://unpkg.com/three/examples/jsm/",
+          "classes": "./class/classes.js",
+          "scripts/": "./assets/scripts/"
         }
       }
-    </script>
+  </script>
 </head>
 
 <body>
 
   <div id="container">
-    
-    <div id="inspector">
-      <div id="canvas"></div>
-    </div>
-
+    <div id="canvas"></div>
+    <div id="inspector"></div>
     <div id="console">
       <div id="consoleResize"></div>
     </div>
   </div>
 
-  <script type="module" src="./ui/console.js"></script>
-
-  <script type="module" src="./editor/scene.js"></script>
-  <script type="module" src="./input/input.js"></script>
+  <script src="./ui/console.js"></script>
+  <script src="./ui/inspector.js"></script>
 
   <script type="module" src="./main.js"></script>
 </body>

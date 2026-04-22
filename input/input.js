@@ -1,5 +1,5 @@
 import * as THREE from 'three';
-import { camera, scene, renderer } from '../editor/scene.js'
+import { camera, scene, renderer } from '../editor/editor.js'
 
 // pointerlock stuff
 let isLocked = false;
@@ -57,8 +57,8 @@ document.addEventListener('pointerup', () => {
 const consoleMaxHeight = 0.75;
 document.addEventListener('mousemove', (e) => {
   if (uiDrag === 'console') {
-    const newHeight = Math.min(Math.max(Math.round(window.innerHeight - e.clientY), 15), window.innerHeight*consoleMaxHeight);
-    _console.style.setProperty('max-height', newHeight + 'px');
+    const newHeight = Math.min(Math.max(Math.round(window.innerHeight - e.clientY), 35), window.innerHeight*consoleMaxHeight);
+    _console.style.setProperty('height', newHeight + 'px');
     consoleResize.style.setProperty('bottom', (newHeight - 5) + 'px');
     isDragging = true;
     return;
@@ -174,6 +174,3 @@ function raycast(e) {
     }
   }
 }
-
-
-console.log('input.js loaded')

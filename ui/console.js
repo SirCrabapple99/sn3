@@ -29,6 +29,6 @@ console.log = function (...args) {
   originalLog.apply(console, args);
 };
 
-console.log('console.js loaded')
+console.log('log test')
 console.warn('warn test')
 throw new Error('error test')

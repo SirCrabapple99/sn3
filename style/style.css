@@ -17,27 +17,28 @@ body {
 
 #console {
   background-color: #242424;
+  border: 2px solid #dbdbdb;
 
-  width: 100%;
-  min-height: 75px;
-  height: 9000px;
-  max-height: 15px;
+  width: auto;
+  min-height: 35px;
+  height: 150px;
 
   overflow-y: scroll;
   overflow-x: hidden;
   position: fixed;
 
-  bottom: 0;
   left: 0;
+  right: 200px;
+  bottom: 0;
 }
 
 #consoleResize {
   background-color: transparent;
 
   width: 100%;
-  min-height: 10px;
+  height: 10px;
 
-  bottom: 70px;
+  bottom: 145px;
   position: fixed;
 }
 
@@ -109,7 +110,16 @@ body {
 
 /* inspector */
 #inspector {
+  background-color: #242424;
+  outline: 2px solid #dbdbdb;
+
+  overflow-y: scroll;
+  overflow-x: hidden;
   position: fixed;
+
+  height: 100vh;
+  top: 0;
+  right: 0;
 
   width: 900px;
   max-width: 200px;

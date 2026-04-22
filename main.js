@@ -1,14 +1,25 @@
 import * as THREE from 'three';
-import { camera, scene, renderer } from './editor/scene.js'
-import { inputStuff } from './input/input.js'
+import { camera, scene, renderer } from './editor/editor.js';
+import { inputStuff } from './input/input.js';
+import { play } from './editor/play.js';
 
+let playing = false;
 function animate() {
     requestAnimationFrame(animate);
-    inputStuff();
-    renderer.render(scene, camera);
-    // arrowRenderer.render(arrowScene, arrowCamera);
+
+    if (playing) {
+        play();
+    } else {
+        inputStuff();
+        renderer.render(scene, camera);
+    }
 }
   
 animate();
 
-console.log('main.js loaded')
+document.addEventListener('keydown', (e) => {
+    if (e.code === 'KeyI') {
+        playing = !playing
+        console.log('playing: ' + playing)
+    }
+})
