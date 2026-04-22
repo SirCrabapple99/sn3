@@ -29,12 +29,10 @@ renderer.domElement.addEventListener('pointerdown', (e) => {
 });
 
 renderer.domElement.addEventListener('pointerup', (e) => {
-  pointerDown = false;
   // if not dragging try and select an object
   if (!isDragging && !isLocked) {
     raycast(e)
   }
-  isDragging = false;
 });
 
 const _console = document.getElementById('console');
@@ -47,17 +45,16 @@ consoleResize.addEventListener("mousedown", function (e) {
   uiDrag = 'console';
 });
 
-document.addEventListener('pointerup', () => {
+window.addEventListener('pointerup', () => {
   uiDrag = null;
+  pointerDown = false;
+  isDragging = false;
 })
 
-// move camera
-
-// why tf did i make it like this idk but im never toucing console resizing again
 const consoleMaxHeight = 0.75;
 document.addEventListener('mousemove', (e) => {
   if (uiDrag === 'console') {
-    const newHeight = Math.min(Math.max(Math.round(window.innerHeight - e.clientY), 35), window.innerHeight*consoleMaxHeight);
+    const newHeight = Math.min(Math.max(Math.round(window.innerHeight - e.clientY), 35), window.innerHeight * consoleMaxHeight);
     _console.style.setProperty('height', newHeight + 'px');
     consoleResize.style.setProperty('bottom', (newHeight - 5) + 'px');
     isDragging = true;
