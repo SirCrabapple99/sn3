@@ -10,7 +10,8 @@ export class Scene {
 
     addObject(gameObject) {
         this.objects.add(gameObject);
-        gameObject.awake();
+        gameObject.scene = this;
+        if (this.playing) gameObject.awake();
         if (gameObject.active) {
             this.activeObjects.add(gameObject);
             if (this.playing) gameObject.start();
@@ -27,14 +28,20 @@ export class Scene {
     }
 
     disableObject(gameObject) {
+        if (this.playing && !gameObject.active) gameObject.onDisable();
         gameObject.active = false;
         this.activeObjects.delete(gameObject);
-        if (this.playing) gameObject.onDisable();
     }
 
-    update(delta) {
+    update() {
         for (const ob of this.activeObjects) {
-            ob.update(delta);
+            ob.update();
+        }
+    }
+
+    fixedUpdate(delta) {
+        for (const ob of this.activeObjects) {
+            ob.fixedUpdate(delta);
         }
     }
 
@@ -45,17 +52,31 @@ export class Scene {
     }
 
     awake() {
-        for (const ob of objects) {
+        for (const ob of this.objects) {
             ob.awake();
+        }
+    }
+
+    destroy() {
+        for (const ob of this.objects) {
+            ob.onDestroy();
         }
     }
 
     begin() {
         this.playing = true;
+        this.awake();
         this.start();
     }
 
     end() {
         this.playing = false;
+        this.destroy();
+        for (const ob of this.objects) {
+            for (const comp of ob.components.values()) {
+                comp.started = false;
+                comp.awoke = false;
+            }
+        }
     }
 }

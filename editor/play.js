@@ -5,9 +5,6 @@ import { testScene } from '../assets/scenes/testscene/testScene.js';
 
 let first = true;
 export function play() {
-    if (first) {
-        testScene.start();
-        first = false;
-    }
+    testScene.update();
     renderer.render(scene, camera);
 }

@@ -3,4 +3,3 @@ import { obj } from './objects/testObj.js'
 
 export const testScene = new Scene('test');
 testScene.addObject(obj);
-testScene.enableObject(obj);

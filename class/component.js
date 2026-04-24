@@ -1,6 +1,7 @@
 export class Component {
     constructor(gameObject) {
         this.gameObject = gameObject;
+        this.publicProperties = [];
     }
 
     onEnable() { }

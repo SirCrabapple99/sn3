@@ -7,11 +7,14 @@ export class GameObject {
         this.children = [];
         this.active = true;
         this.started = false;
+        this.awoke = false;
+        this.scene;
     }
 
     addComponent(ComponentClass, ...args) {
         const c = new ComponentClass(this, ...args);
         this.components.set(ComponentClass, c);
+        c.awake?.(...args);
         return c;
     }
 
@@ -19,9 +22,14 @@ export class GameObject {
         return this.components.get(ComponentClass);
     }
 
-    update(delta) {
-        for (const c of this.components.values()) c.update?.(delta);
-        for (const child of this.children) child.update(delta);
+    update() {
+        for (const c of this.components.values()) c.update?.();
+        for (const child of this.children) child.update();
+    }
+
+    fixedUpdate(delta) {
+        for (const c of this.components.values()) c.fixedUpdate?.(delta);
+        for (const child of this.children) child.fixedUpdate(delta);
     }
 
     start() {
@@ -34,20 +42,29 @@ export class GameObject {
     }
 
     awake() {
-        for (comp in this.components) {
-            comp.awake()
+        for (const comp of this.components.values()) {
+            if (!comp.awoke) {
+                comp.awake?.();
+                comp.awoke = true;
+            }
         }
     }
 
     onEnable() {
-        for (comp in this.components) {
+        for (const comp of this.components.values()) {
             comp.onEnable()
         }
     }
 
     onDisable() {
-        for (comp in this.components) {
+        for (const comp of this.components.values()) {
             comp.onDisable()
+        }
+    }
+
+    onDestroy() {
+        for (const comp of this.components.values()) {
+            comp.onDestroy()
         }
     }
 }
