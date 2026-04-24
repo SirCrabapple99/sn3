@@ -37,12 +37,19 @@ renderer.domElement.addEventListener('pointerup', (e) => {
 
 const _console = document.getElementById('console');
 const consoleResize = document.getElementById('consoleResize');
+const inspector = document.getElementById('inspector');
+const inspectorResize = document.getElementById('inspectorResize');
 
 let moveX;
 let uiDrag = null;
-consoleResize.addEventListener("mousedown", function (e) {
+consoleResize.addEventListener("mousedown", () => {
   isDragging = true;
   uiDrag = 'console';
+});
+
+inspectorResize.addEventListener("mousedown", () => {
+  isDragging = true;
+  uiDrag = 'inspector';
 });
 
 window.addEventListener('pointerup', () => {
@@ -52,11 +59,29 @@ window.addEventListener('pointerup', () => {
 })
 
 const consoleMaxHeight = 0.75;
+function resizeConsole(e) {
+  const newHeight = Math.min(Math.max(Math.round(window.innerHeight - e.clientY), 35), window.innerHeight * consoleMaxHeight);
+  _console.style.height = newHeight + 'px';
+  consoleResize.style.bottom = (newHeight - 5) + 'px';
+}
+
+const inspectorMaxWidth = 0.75;
+function resizeInspector(e) {
+  const newWidth = Math.min(Math.max(Math.round(window.innerWidth - e.clientX), 35), window.innerWidth * inspectorMaxWidth);
+  inspector.style.width = newWidth + 'px';
+  inspectorResize.style.right = (newWidth - 5) + 'px';
+
+  _console.style.width = window.innerWidth - newWidth + 'px';
+  consoleResize.style.width = window.innerWidth - newWidth + 'px';
+}
+
 document.addEventListener('mousemove', (e) => {
-  if (uiDrag === 'console') {
-    const newHeight = Math.min(Math.max(Math.round(window.innerHeight - e.clientY), 35), window.innerHeight * consoleMaxHeight);
-    _console.style.setProperty('height', newHeight + 'px');
-    consoleResize.style.setProperty('bottom', (newHeight - 5) + 'px');
+  if (uiDrag == 'console') {
+    resizeConsole(e);
+    isDragging = true;
+    return;
+  } else if (uiDrag == 'inspector') {
+    resizeInspector(e);
     isDragging = true;
     return;
   }
@@ -171,3 +196,9 @@ function raycast(e) {
     }
   }
 }
+
+window.addEventListener('load', () => {
+  const newWidth = window.innerWidth - inspector.offsetWidth;
+  _console.style.width = newWidth + 'px';
+  consoleResize.style.width = newWidth + 'px';
+})
