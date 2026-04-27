@@ -1,5 +1,7 @@
 import * as THREE from 'three';
-import { camera, scene, renderer } from '../editor/editor.js'
+import { camera, scene, renderer } from '../editor/editor.js';
+import { updateInspector } from '../ui/inspector.js';
+import { obj } from 'scenes/testscene/objects/testObj.js'
 
 // pointerlock stuff
 let isLocked = false;
@@ -59,15 +61,17 @@ window.addEventListener('pointerup', () => {
 })
 
 const consoleMaxHeight = 0.75;
+const consoleMinHeight = 35;
 function resizeConsole(e) {
-  const newHeight = Math.min(Math.max(Math.round(window.innerHeight - e.clientY), 35), window.innerHeight * consoleMaxHeight);
+  const newHeight = Math.min(Math.max(Math.round(window.innerHeight - e.clientY), consoleMinHeight), window.innerHeight * consoleMaxHeight);
   _console.style.height = newHeight + 'px';
   consoleResize.style.bottom = (newHeight - 5) + 'px';
 }
 
 const inspectorMaxWidth = 0.75;
+const inspectorMinWidth = 125;
 function resizeInspector(e) {
-  const newWidth = Math.min(Math.max(Math.round(window.innerWidth - e.clientX), 35), window.innerWidth * inspectorMaxWidth);
+  const newWidth = Math.min(Math.max(Math.round(window.innerWidth - e.clientX), inspectorMinWidth), window.innerWidth * inspectorMaxWidth);
   inspector.style.width = newWidth + 'px';
   inspectorResize.style.right = (newWidth - 5) + 'px';
 
@@ -110,6 +114,10 @@ document.addEventListener('keydown', (e) => {
   if (e.code == 'KeyL') {
     if (isLocked) document.exitPointerLock();
     else renderer.domElement.requestPointerLock();
+  }
+
+  if (e.code == 'KeyK') {
+    updateInspector(obj);
   }
 
 });

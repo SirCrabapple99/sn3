@@ -1,7 +1,10 @@
 export class Component {
     constructor(gameObject) {
         this.gameObject = gameObject;
-        this.publicProperties;
+        this.name = ''
+        this.pubVars = {
+
+        }
     }
 
     onEnable() { }

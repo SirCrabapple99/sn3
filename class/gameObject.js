@@ -1,4 +1,4 @@
-import { Transform } from "classes";
+import { Transform, Component } from "classes";
 export class GameObject {
     constructor(name) {
         this.name = name;

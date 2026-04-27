@@ -1,7 +1,10 @@
-import { Component } from 'classes'; 
+import { Component, UI } from 'classes'; 
 export class testScript extends Component {
     awake() {
-        this.testProperty = 0.5;
+        this.pubVars.testProperty = new UI.Slider({
+            value: 0.5,
+            step: 0.1,
+        });
     }
 
     start() {

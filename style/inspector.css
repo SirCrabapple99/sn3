@@ -1,4 +1,6 @@
 #inspector {
+    display: flex;
+    flex-direction: column;
     background-color: #242424;
     outline: 2px solid #dbdbdb;
 
@@ -40,8 +42,62 @@
 
     line-height: 25px;
     padding-left: 4px;
+    margin-bottom: 4px;
 
     width: 100%;
+    min-height: 25px;
+    height: auto;
+    background-color: #1d1d1d;
+}
+
+.compVar {
+    display: flex;
+    box-sizing: border-box;
+    border: 2px solid #dbdbdb;
+
+    line-height: 25px;
+    padding-left: 4px;
+    padding-right: 4px;
+    margin-bottom: 4px;
+
+    width: calc(100% - 4px);
     height: 25px;
     background-color: #1d1d1d;
+}
+
+.compSlider {
+    accent-color: #dbdbdb;
+    margin: auto 8px auto auto;
+    width: 50%;
+}
+
+/* Track */
+
+.compSlider::-webkit-slider-runnable-track {
+    background-color: #dbdbdb;
+    height: 4px;
+
+}
+
+.compSlider::-moz-range-track {
+    background-color: #dbdbdb;
+    height: 4px;
+}
+
+/* Thumb */
+.compSlider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    background-color: #dbdbdb;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    margin-top: -6px;
+}
+
+.compSlider::-moz-range-thumb {
+    background-color: #dbdbdb;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    border: none;
 }
