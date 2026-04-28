@@ -1,8 +1,8 @@
 import * as THREE from 'three';
 import { camera, scene, renderer } from './editor/editor.js';
-import { inputStuff } from './input/input.js';
 import { play } from './editor/play.js';
 import { testScene } from '../assets/scenes/testscene/testScene.js';
+import { inputStuff, selectedObject } from './input/input.js';
 
 let playing = false;
 function animate() {
@@ -11,7 +11,7 @@ function animate() {
     if (playing) {
         play();
     } else {
-        inputStuff();
+        inputStuff(playing);
         renderer.render(scene, camera);
     }
 }
@@ -24,5 +24,7 @@ document.addEventListener('keydown', (e) => {
         if (playing) testScene.begin();
         else testScene.end();
         console.log('playing: ' + playing)
+        inputStuff(false);
+        console.log(selectedObject)
     }
 })

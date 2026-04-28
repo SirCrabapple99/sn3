@@ -5,6 +5,11 @@ export class testScript extends Component {
             value: 0.5,
             step: 0.1,
         });
+        this.pubVars.testProperty2 = new UI.Slider({
+            value: 3,
+            step: 1,
+            minMax: [-2, 5],
+        });
     }
 
     start() {

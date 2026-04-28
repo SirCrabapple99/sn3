@@ -15,7 +15,7 @@
     top: 0;
     right: 0;
 
-    min-width: 35px;
+    min-width: 250px;
     width: 400px;
 }
 
@@ -33,7 +33,11 @@
     cursor: ew-resize;
 }
 
+/* COMPONENT BOXES */
+
 .component {
+    overflow-y: hidden;
+    overflow-x: scroll;
     box-sizing: border-box;
     border: 2px solid #dbdbdb;
 
@@ -50,6 +54,8 @@
     background-color: #1d1d1d;
 }
 
+/* VARIABLE LABELS */
+
 .compVar {
     display: flex;
     box-sizing: border-box;
@@ -60,15 +66,33 @@
     padding-right: 4px;
     margin-bottom: 4px;
 
-    width: calc(100% - 4px);
+    width: calc(auto - 4px);
     height: 25px;
     background-color: #1d1d1d;
 }
 
+/* SLIDER */
+
 .compSlider {
     accent-color: #dbdbdb;
-    margin: auto 8px auto auto;
-    width: 50%;
+    margin: auto;
+    width: auto;
+}
+
+.sliderTextBox {
+    box-sizing: border-box;
+    margin: auto;
+    text-align: center;
+    color: white;
+    
+    height: 100%;
+    border: 2px solid #2d2d2d;
+    background-color: #1d1d1d;
+}
+
+.sliderTextBox:focus {
+    background-color: #2d2d2d;
+    outline: none;
 }
 
 /* Track */

@@ -1,10 +1,9 @@
 import { UI } from 'classes';
 const inspector = document.getElementById('inspector');
 
-export function updateInspector(gameObject) {
-    if (gameObject === null) {
-    } else {
-        clearInspector();
+export function updateInspector(gameObject = null) {
+    clearInspector();
+    if (gameObject !== null) {
         createContainer('objTransforms');
         for (const comp of gameObject.components.values()) {
             createContainer(comp);
@@ -44,16 +43,17 @@ function createSlider(comp, pub, key) {
     label.for = comp.constructor.name + '_' + key + '_input';
     label.innerHTML = key + ':';
 
-    // label for the slider value
-    const label2 = document.createElement('label');
+    // input/label for the slider value
+    const label2 = document.createElement('input');
+    label2.className = 'sliderTextBox'
     label2.for = comp.constructor.name + '_' + key + '_input';
-    label2.innerHTML = comp.value;
+    label2.value = comp.value;
     // make sure 1 is the same length as 0.1 so the slider doesn't randomly move
-    label2.style.width = comp.step.toString().length + 'ch'
+    label2.style.width = '20%'
 
     // update the displayed value
     slider.oninput = function() {
-        label2.innerHTML = this.value;
+        label2.value = this.value;
     }
     
     // append it all
@@ -66,7 +66,10 @@ function createSlider(comp, pub, key) {
 
 function createContainer(comp) {
     if (comp === 'objTransforms') {
-        
+        // create main component container
+        const mainContainer = document.createElement('div');
+        mainContainer.className = 'component';
+        mainContainer.innerHTML = comp.constructor.name;
     } else {
         // create main component container
         const mainContainer = document.createElement('div');

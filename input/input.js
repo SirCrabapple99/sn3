@@ -1,11 +1,14 @@
 import * as THREE from 'three';
 import { camera, scene, renderer } from '../editor/editor.js';
 import { updateInspector } from '../ui/inspector.js';
-import { obj } from 'scenes/testscene/objects/testObj.js'
+import { obj } from 'scenes/testscene/objects/testObj.js';
+
+let playing = false;
 
 // pointerlock stuff
 let isLocked = false;
 document.addEventListener('pointerlockchange', () => {
+  if (playing) return;
   isLocked = !!document.pointerLockElement;
 });
 
@@ -24,6 +27,7 @@ let pitch = camera.rotation.x;
 let pointerDown = false;
 
 renderer.domElement.addEventListener('pointerdown', (e) => {
+  if (playing) return;
   pointerDown = true;
   pointerDownTime = performance.now();
   pointerDownPos = { x: e.clientX, y: e.clientY };
@@ -31,6 +35,7 @@ renderer.domElement.addEventListener('pointerdown', (e) => {
 });
 
 renderer.domElement.addEventListener('pointerup', (e) => {
+  if (playing) return;
   // if not dragging try and select an object
   if (!isDragging && !isLocked) {
     raycast(e)
@@ -69,7 +74,7 @@ function resizeConsole(e) {
 }
 
 const inspectorMaxWidth = 0.75;
-const inspectorMinWidth = 125;
+const inspectorMinWidth = 300;
 function resizeInspector(e) {
   const newWidth = Math.min(Math.max(Math.round(window.innerWidth - e.clientX), inspectorMinWidth), window.innerWidth * inspectorMaxWidth);
   inspector.style.width = newWidth + 'px';
@@ -90,7 +95,7 @@ document.addEventListener('mousemove', (e) => {
     return;
   }
 
-  if (!pointerDown && !isLocked) return;
+  if ((!pointerDown && !isLocked) || playing) return;
 
   // check if dragging
   const dx = e.clientX - pointerDownPos.x;
@@ -108,10 +113,12 @@ document.addEventListener('mousemove', (e) => {
 
 // input event listeners
 document.addEventListener('keydown', (e) => {
+  if (playing) return;
   keyDown(e);
 
   // pointer lock
   if (e.code == 'KeyL') {
+    if (playing) return;
     if (isLocked) document.exitPointerLock();
     else renderer.domElement.requestPointerLock();
   }
@@ -131,6 +138,7 @@ const keyStates = new Array(255).fill(0);
 
 // key event listeners
 function keyDown(e) {
+  if (playing) return;
   if (!e.repeat) keyStates[e.keyCode] = 1;
 }
 
@@ -142,7 +150,17 @@ function keyUp(e) {
 let camDir = new THREE.Vector3();
 let leftRight = new THREE.Vector3();
 
-export function inputStuff(flat = false) {
+export function inputStuff(playing1 = false, flat = false) {
+  playing = playing1;
+
+  if (playing === true) {
+    if (selectedObject != null) {
+      selectedObject.material.wireframe = false;
+      return;
+    }
+    return;
+  }
+
   if (flat) {
     camera.getWorldDirection(camDir);
     camDir.y = 0;
@@ -178,13 +196,15 @@ export function inputStuff(flat = false) {
 
 // selecting an object
 const defaultMaterial = new THREE.MeshBasicMaterial({ color: 0xff0000 });
-let selectedObject = null;
+export let selectedObject = null;
 
 // raycasting stuff
 const raycaster = new THREE.Raycaster();
 const mouse = new THREE.Vector2();
 
 function raycast(e) {
+  if (playing) return;
+
   const rect = renderer.domElement.getBoundingClientRect();
   mouse.x = ((e.clientX - rect.left) / rect.width) * 2 - 1;
   mouse.y = -((e.clientY - rect.top) / rect.height) * 2 + 1;
@@ -202,6 +222,14 @@ function raycast(e) {
       selectedObject = hit.object;
       hit.object.material.wireframe = true;
     }
+  }
+
+  if (selectedObject !== null) {
+    if (selectedObject.gameObject) {
+      updateInspector(selectedObject.gameObject);
+      return
+    }
+    updateInspector()
   }
 }
 

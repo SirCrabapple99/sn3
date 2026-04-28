@@ -6,6 +6,7 @@ export class MeshRenderer extends Component {
         this.geometry = properties.geometry ?? new THREE.BoxGeometry(1, 1, 1);
         this.material = properties.material ?? new THREE.MeshStandardMaterial();
         this.mesh = new THREE.Mesh(this.geometry, this.material);
+        this.mesh.gameObject = this.gameObject;
     }
 
     update() {
