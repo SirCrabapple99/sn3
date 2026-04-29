@@ -30,11 +30,10 @@
     cursor: ew-resize;
 }
 
-/* COMPONENT BOXES */
+/* Component Holder */
 
 .component {
-    overflow-y: hidden;
-    overflow-x: scroll;
+    overflow: hidden;
     box-sizing: border-box;
     border: 2px solid #dbdbdb;
 
@@ -51,9 +50,12 @@
     background-color: #1d1d1d;
 }
 
-/* VARIABLE LABELS */
+/* Variable Holder */
 
 .compVar {
+    overflow-y: hidden;
+    overflow-x: scroll;
+
     display: flex;
     box-sizing: border-box;
     border: 2px solid #dbdbdb;
@@ -68,17 +70,11 @@
     background-color: #1d1d1d;
 }
 
-/* SLIDER */
+/* General Labels */
 
-.compSlider {
-    accent-color: #dbdbdb;
-    margin: auto;
-    width: auto;
-}
-
-.sliderTextBox {
+.compTextBox {
     box-sizing: border-box;
-    margin: auto;
+    margin: 0 auto 0 4px;
     text-align: center;
     color: white;
 
@@ -87,12 +83,24 @@
     background-color: #1d1d1d;
 }
 
-.sliderTextBox:focus {
+.compTextBox:focus {
     background-color: #2d2d2d;
     outline: none;
 }
 
-/* Track */
+.compLabel {
+    margin: 0 4px 0 auto;
+}
+
+/* Slider */
+
+.compSlider {
+    accent-color: #dbdbdb;
+    margin: auto;
+    width: auto;
+}
+
+/* Slider Track */
 
 .compSlider::-webkit-slider-runnable-track {
     background-color: #dbdbdb;

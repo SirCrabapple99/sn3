@@ -40,16 +40,16 @@ function createSlider(comp, pub, key) {
 
     // label for the variable name
     const label = document.createElement('label');
+    label.className = 'compLabel'
     label.for = comp.constructor.name + '_' + key + '_input';
     label.innerHTML = key + ':';
 
     // input/label for the slider value
     const label2 = document.createElement('input');
-    label2.className = 'sliderTextBox'
+    label2.className = 'compTextBox'
     label2.for = comp.constructor.name + '_' + key + '_input';
     label2.value = comp.value;
-    // make sure 1 is the same length as 0.1 so the slider doesn't randomly move
-    label2.style.width = '20%'
+    label2.style.minWidth = '20%'
 
     // update the displayed value
     slider.oninput = function() {
