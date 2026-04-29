@@ -21,7 +21,7 @@ canvas.appendChild(renderer.domElement);
 // resize main window
 const _console = document.getElementById('console');
 const inspector = document.getElementById('inspector');
-function resize() {
+export function resize() {
     const w = canvas.clientWidth - inspector.clientWidth;
     const h = canvas.clientHeight - _console.clientHeight;
     camera.aspect = w / h;
@@ -36,8 +36,6 @@ window.addEventListener('resize', () => {
 const observer = new ResizeObserver(() => {
     resize()
 })
-
-observer.observe(_console)
 
 // move camera back
 camera.position.z = 5;

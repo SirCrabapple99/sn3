@@ -1,3 +1,5 @@
+import { resize } from '../editor/editor.js';
+
 const consoleResize = document.getElementById('consoleResize');
 const inspector = document.getElementById('inspector');
 const inspectorResize = document.getElementById('inspectorResize');
@@ -45,18 +47,16 @@ fsResize.addEventListener("mousedown", () => {
 
 window.addEventListener('pointerup', () => {
     uiDrag = null;
+    resize();
 });
 
 document.addEventListener('mousemove', (e) => {
     if (uiDrag == 'console') {
         resizeConsole(e);
-        isDragging = true;
     } else if (uiDrag == 'fs') {
         resizeFs(e);
-        isDragging = true;
     } else if (uiDrag == 'inspector') {
         resizeInspector(e);
-        isDragging = true;
     }
 });
 
@@ -95,4 +95,5 @@ window.addEventListener('load', () => {
     const newWidth = window.innerWidth - inspector.offsetWidth;
     _console.style.width = newWidth + 'px';
     consoleResize.style.width = newWidth + 'px';
+    resize();
 })

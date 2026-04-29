@@ -69,9 +69,10 @@
 }
 
 .fsButton {
+    user-select: none;
     top: 0;
     position: sticky;
-    
+
     display: inline-block;
     box-sizing: border-box;
 
@@ -93,6 +94,7 @@
 }
 
 .cButton {
+    user-select: none;
     top: 0;
     position: sticky;
     
