@@ -47,6 +47,43 @@ const consoleResize = document.getElementById('consoleResize');
 const inspector = document.getElementById('inspector');
 const inspectorResize = document.getElementById('inspectorResize');
 
+const fs = document.getElementById('fs');
+
+const fsButton = document.getElementsByClassName('fsButton');
+const cButton = document.getElementsByClassName('cButton');
+
+let cMenu = true;
+
+function showFS() {
+  if (cMenu) {
+    _console.style.visibility = "hidden";
+    fs.style.visibility = "visible";
+
+    fsButton[0].classList.add("fsActive");
+    fsButton[1].classList.add("fsActive");
+    cButton[0].classList.remove("fsActive");
+    cButton[1].classList.remove("fsActive");
+  }
+}
+
+function showC() {
+  if (cMenu) {
+    fs.style.visibility = "hidden";
+    _console.style.visibility = "visible";
+
+    cButton[0].classList.add("fsActive");
+    cButton[1].classList.add("fsActive");
+    fsButton[0].classList.remove("fsActive");
+    fsButton[1].classList.remove("fsActive");
+  }
+}
+
+fsButton[0].addEventListener("click", showFS)
+fsButton[1].addEventListener("click", showFS)
+
+cButton[0].addEventListener("click", showC)
+cButton[1].addEventListener("click", showC)
+
 let moveX;
 let uiDrag = null;
 consoleResize.addEventListener("mousedown", () => {

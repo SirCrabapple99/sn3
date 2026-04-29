@@ -1,3 +1,4 @@
+import * as A from './filesystem/opfs.js';
 import * as THREE from 'three';
 import { camera, scene, renderer } from './editor/editor.js';
 import { play } from './editor/play.js';
