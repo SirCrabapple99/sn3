@@ -42,96 +42,15 @@ renderer.domElement.addEventListener('pointerup', (e) => {
   }
 });
 
-const _console = document.getElementById('console');
-const consoleResize = document.getElementById('consoleResize');
-const inspector = document.getElementById('inspector');
-const inspectorResize = document.getElementById('inspectorResize');
-
-const fs = document.getElementById('fs');
-
-const fsButton = document.getElementsByClassName('fsButton');
-const cButton = document.getElementsByClassName('cButton');
-
-let cMenu = true;
-
-function showFS() {
-  if (cMenu) {
-    _console.style.visibility = "hidden";
-    fs.style.visibility = "visible";
-
-    fsButton[0].classList.add("fsActive");
-    fsButton[1].classList.add("fsActive");
-    cButton[0].classList.remove("fsActive");
-    cButton[1].classList.remove("fsActive");
-  }
-}
-
-function showC() {
-  if (cMenu) {
-    fs.style.visibility = "hidden";
-    _console.style.visibility = "visible";
-
-    cButton[0].classList.add("fsActive");
-    cButton[1].classList.add("fsActive");
-    fsButton[0].classList.remove("fsActive");
-    fsButton[1].classList.remove("fsActive");
-  }
-}
-
-fsButton[0].addEventListener("click", showFS)
-fsButton[1].addEventListener("click", showFS)
-
-cButton[0].addEventListener("click", showC)
-cButton[1].addEventListener("click", showC)
 
 let moveX;
-let uiDrag = null;
-consoleResize.addEventListener("mousedown", () => {
-  isDragging = true;
-  uiDrag = 'console';
-});
-
-inspectorResize.addEventListener("mousedown", () => {
-  isDragging = true;
-  uiDrag = 'inspector';
-});
 
 window.addEventListener('pointerup', () => {
-  uiDrag = null;
   pointerDown = false;
   isDragging = false;
 })
 
-const consoleMaxHeight = 0.75;
-const consoleMinHeight = 35;
-function resizeConsole(e) {
-  const newHeight = Math.min(Math.max(Math.round(window.innerHeight - e.clientY), consoleMinHeight), window.innerHeight * consoleMaxHeight);
-  _console.style.height = newHeight + 'px';
-  consoleResize.style.bottom = (newHeight - 5) + 'px';
-}
-
-const inspectorMaxWidth = 0.75;
-const inspectorMinWidth = 300;
-function resizeInspector(e) {
-  const newWidth = Math.min(Math.max(Math.round(window.innerWidth - e.clientX), inspectorMinWidth), window.innerWidth * inspectorMaxWidth);
-  inspector.style.width = newWidth + 'px';
-  inspectorResize.style.right = (newWidth - 5) + 'px';
-
-  _console.style.width = window.innerWidth - newWidth + 'px';
-  consoleResize.style.width = window.innerWidth - newWidth + 'px';
-}
-
 document.addEventListener('mousemove', (e) => {
-  if (uiDrag == 'console') {
-    resizeConsole(e);
-    isDragging = true;
-    return;
-  } else if (uiDrag == 'inspector') {
-    resizeInspector(e);
-    isDragging = true;
-    return;
-  }
-
   if ((!pointerDown && !isLocked) || playing) return;
 
   // check if dragging
@@ -269,9 +188,3 @@ function raycast(e) {
     updateInspector()
   }
 }
-
-window.addEventListener('load', () => {
-  const newWidth = window.innerWidth - inspector.offsetWidth;
-  _console.style.width = newWidth + 'px';
-  consoleResize.style.width = newWidth + 'px';
-})

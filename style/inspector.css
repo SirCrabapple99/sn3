@@ -16,7 +16,7 @@
     right: 0;
 
     min-width: 250px;
-    width: 400px;
+    width: 250px;
 }
 
 #inspectorResize {
@@ -25,11 +25,8 @@
     width: 10px;
     height: 100%;
 
-    right: 395px;
+    right: 245px;
     position: fixed;
-}
-
-#inspectorResize:hover {
     cursor: ew-resize;
 }
 

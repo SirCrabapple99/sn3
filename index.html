@@ -23,7 +23,8 @@
           "three/addons/": "https://unpkg.com/three/examples/jsm/",
           "classes": "./class/classes.js",
           "scripts/": "./assets/scripts/",
-          "scenes/": "./assets/scenes/"
+          "scenes/": "./assets/scenes/",
+          "filesystem/": "./filesystem/"
         }
       }
   </script>
@@ -44,15 +45,24 @@
       </div>
 
       <div id="fs">
-        <div class="fsButton">Files</div>
-        <div class="cButton fsActive">Console</div>
+        <div class="fsButton fsActive">Files</div>
+        <div class="cButton">Console</div>
+
+        <div id="fsContent">
+          <div id="fsSideBar">
+            <div id="fsProj">Structure</div>
+
+            <div id="fsResize"></div>
+          </div>
+        </div>
       </div>
 
       <div id="consoleResize"></div>
     </div>
   </div>
-
   <script src="./ui/console.js"></script>
+  <script src="./input/ui.js"></script>
+
   <script type="module" src="./ui/inspector.js"></script>
 
   <script type="module" src="./main.js"></script>
